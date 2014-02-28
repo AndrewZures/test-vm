@@ -1,206 +1,157 @@
-set nocompatible
-syntax enable
+syntax on
 
 filetype off
-call pathogen#infect()
+call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
-set modelines=0
-set encoding=utf-8
-set autoindent
-set nosmartindent
-set history=10000
+compiler ruby
+
+set incsearch
+set hlsearch
 set number
+set showmatch
 set hidden
 set backspace=indent,eol,start
-set textwidth=0
+set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+set ruler
+set wrap
+set scrolloff=5
+set nofoldenable
+set nocompatible
+set laststatus=2
+set ignorecase
+set smartcase
+set cursorline
+set colorcolumn=80
+set wildignore+=target
 
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+set nobackup
+set nowritebackup
+set noswapfile
 
-"remap jk
-":inoremap jk <esc>
-"
-"
-compile ruby
+set winwidth=90
+set winminwidth=15
+
+set list
+set listchars=tab:\ \ ,trail:·
+
+
+hi Search    ctermbg=none ctermfg=none cterm=underline
+hi IncSearch ctermbg=none ctermfg=none cterm=bold,underline
+
+" plugin options
+let NERDTreeMinimalUI           = 1
+let NERDTreeQuitOnOpen          = 0
+let NERDChristmasTree           = 1
+let NERDTreeHighlightCursorline = 0
+let NERDTreeWinSize             = 35
+let NERDTreeDirArrows           = 1
+let NERDTreeStatusline          = ' '
+let NERDTreeShowHidden          = 1
+let NERDTreeChDirMode           = 1
+let NERDTreeShowLineNumbers     = 0
+let NERDTreeMouseMode           = 2
+let NERDTreeAutoCenter          = 1
+let NERDTreeAutoCenterThreshold = 10
+let NERDTreeIgnore              = ['\.git', '\.pyc', '\.jhw-cache']
+let g:no_html_toolbar           = 'yes'
+let g:CommandTMaxHeight         = 10
+let g:CommandTMaxDepth          = 10
+let g:airline_powerline_fonts   = 1
+let coffee_no_trailing_space_error = 1
+
+autocmd QuickFixCmdPost *grep* cwindow
+
+" key bindings
+imap <C-L> <SPACE>=><SPACE>
+imap <C-K> ->
 
 nmap , \
 
-" search
-nnoremap / /\v
-vnoremap / /\v
-set ignorecase
-set smartcase
-set gdefault
-set incsearch
-set showmatch
-set hlsearch
-noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
-nnoremap <leader>a :Ack<space>
-
-set cursorline
-set wrap
-set noswapfile
-set bs=2
-
-"ctrlp requirement
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-
-"set background=dark
-
-if &t_Co == 256
-  if $ITERM_PROFILE == "TNE"
-    colorscheme Tomorrow-Night-Eighties
-  endif
-  if $ITERM_PROFILE == "Solarized"
-    colorscheme solarized
-  endif
-  if $ITERM_PROFILE == "TNN"
-    colorscheme Tomorrow-Night
-  endif
-  if $ITERM_PROFILE == "TMDARK"
-    colorscheme Tomorrow-Night-Bright
-  endif
-  if $ITERM_PROFILE == "TMLIGHT"
-    colorscheme Tomorrow
-  endif
-endif
-
-" highlight trailing whitespace
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
-
-" set up highlight group & retain through colorscheme changes
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
-
-" highlight too-long lines
-autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
-highlight LineLengthError ctermbg=black guibg=black
-autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
-
-" set quickfix window to appear after grep invocation
-autocmd QuickFixCmdPost *grep* cwindow
-
-set laststatus=2
-set statusline=
-set statusline+=%<\                       " cut at start
-set statusline+=%2*[%n%H%M%R%W]%*\        " buffer number, and flags
-set statusline+=%-40f\                    " relative path
-set statusline+=%=                        " seperate between right- and left-aligned
-set statusline+=%1*%y%*%*\                " file type
-set statusline+=%10(L(%l/%L)%)\           " line
-set statusline+=%2(C(%v/125)%)\           " column
-set statusline+=%P                        " percentage of file
-
-set undodir=~/.vim/undodir
-set undofile
-set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+map <Leader>t :CommandT<CR>
+map <silent> <LocalLeader>fb :CommandTBuffer<CR>
+map <silent> <LocalLeader>fr :CommandTFlush<CR>
 
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
-let NERDTreeShowHidden=1
 
-map <silent> <LocalLeader>t :CommandT<CR>
-map <silent> <LocalLeader>cf :CommandTFlush<CR>
-map <silent> <LocalLeader>cb :CommandTBuffer<CR>
-map <silent> <LocalLeader>cj :CommandTJump<CR>
-map <silent> <LocalLeader>ct :CommandTTag<CR>
-let g:CommandTAcceptSelectionSplitMap=['<C-s>']
-let g:CommandTAcceptSelectionVSplitMap=['<C-v>']
-let g:CommandTCancelMap=['<Esc>', '<C-c>']
-let g:CommandTMaxHeight=10
-let g:Powerline_symbols = 'fancy'
-"let g:airline_power_fonts = 1
+nmap g/ :Ggrep<space>
+nmap g* :Ggrep <C-R><C-W>
+nmap gn :cnext<CR>
+nmap gp :cprev<CR>
+nmap gq :ccl<CR>
+nmap gl :cwindow<CR>>
 
-imap <C-L> <SPACE>=><SPACE>
+map Y y$
 
-" copy and paste to Mac OS X clipboard
-noremap <leader>y "*y
-noremap <leader>p :set paste<CR>"*p<CR>:set nopaste<CR>
-noremap <leader>P :set paste<CR>"*P<CR>:set nopaste<CR>
-vnoremap <leader>y "*ygv
-
-" window width
-set winwidth=90
-set winminwidth=15
-
-" no arrow keys in normal and insert modes
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-vnoremap <up> <nop>
-vnoremap <down> <nop>
-vnoremap <left> <nop>
-vnoremap <right> <nop>
-noremap j gj
-noremap k gk
-noremap gj j
-noremap gk k
-
-" clean trailing whitespace
-nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
-
-" Emacs bindings in command line mode
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
-
-" keep the cursor in place while joining lines
-nnoremap J mzJ`z
-
-" split line
-" the normal use of S is covered by cc, so don't worry about shadowing it.
-nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
-
-" disable help
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-
-" convert dos format to unix format
-noremap <leader>ff :update<CR>:e ++ff=dos<CR>:setlocal ff=unix<CR>:w<CR>
-
-" HTML tag folding
-nnoremap <leader>ft Vatzf
-
-" CSS properties sorting
-nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
-
-" supertab, scroll top to bottom
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
-"rainbow parenthesis
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-
-let vimclojure#HighlightBuiltins=0
-let vimclojure#ParenRainbow=1
-
-command! ScratchToggle call ScratchToggle()
-
-function! ScratchToggle()
-    if exists("w:is_scratch_window")
-        unlet w:is_scratch_window
-        exec "q"
-    else
-        exec "normal! :Sscratch\<cr>\<C-W>L"
-        let w:is_scratch_window = 1
-    endif
+" functions
+function! Trim()
+  exe "normal mz"
+  %s/\s*$//
+  exe "normal `z"
+  exe "normal zz"
 endfunction
 
-exe 'hi Normal ctermbg=NONE'
+let g:solarized_termcolors=256
+"colorscheme solarized
+"colorscheme Tomorrow-Night-Eighties
 
-nnoremap <silent> <leader><tab> :ScratchToggle<cr>
+function! SetBorder()
+  exe 'hi CursorLine ctermbg=NONE'
+  exe 'hi rubyDefine ctermbg=NONE'
+endfunction
+
+function! MakeLight()
+  exe ':set background=light'
+endfunction
+
+function! MakeDark()
+  exe ':set background=dark'
+endfunction
+
+function! ClearBackground()
+  exe 'hi Normal ctermbg=NONE'
+endfunction
+
+function! SolarizedLight()
+  let g:solarized_termcolors=256
+  let g:solarized_visibility = "high"
+  colorscheme solarized
+  call MakeLight()
+endfunction
+
+function! SolarizedDark()
+  let g:solarized_termcolors=16
+  let g:solarized_visibility = "high"
+  let g:solarized_contrast = "high"
+  colorscheme solarized
+  call MakeDark()
+endfunction
+
+function! TomorrowNight()
+  colorscheme Tomorrow-Night
+  call MakeDark()
+  call ClearBackground()
+endfunction
+
+"call MakeLight()
+call TomorrowNight()
+call SetBorder()
+
+command! -nargs=0 Trim :call Trim()
+command! -nargs=0 MakeLight :call MakeLight()
+command! -nargs=0 MakeDark :call MakeDark()
+command! -nargs=0 TomorrowNight :call TomorrowNight()
+command! -nargs=0 SolarizedLight :call SolarizedLight()
+command! -nargs=0 SolarizedDark :call SolarizedDark()
+command! -nargs=0 ClearBackground :call ClearBackground()
+nnoremap <silent> <Leader>cw :Trim<CR>
+
+" solarized + coffee == annoying parens, fix that
+autocmd BufReadPost *.coffee hi coffeeParen ctermfg=none
+
+augroup markdown
+  au!
+  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup
