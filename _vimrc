@@ -35,6 +35,16 @@ set winminwidth=15
 set list
 set listchars=tab:\ \ ,trail:·
 
+"map leader-space to clear (noh)
+noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
+
+"apply highlight to additional file types
+au BufNewFile,BufRead *.hiccup set filetype=clojure
+au BufNewFile,BufRead *.cljs set filetype=clojure
+
+"clean whitespace
+nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
+
 
 hi Search    ctermbg=none ctermfg=none cterm=underline
 hi IncSearch ctermbg=none ctermfg=none cterm=bold,underline
@@ -93,9 +103,8 @@ function! Trim()
   exe "normal zz"
 endfunction
 
+"syntax highlighting functions
 let g:solarized_termcolors=256
-"colorscheme solarized
-"colorscheme Tomorrow-Night-Eighties
 
 function! SetBorder()
   exe 'hi CursorLine ctermbg=NONE'
@@ -122,11 +131,13 @@ function! SolarizedLight()
 endfunction
 
 function! SolarizedDark()
-  let g:solarized_termcolors=16
+  "let g:solarized_termcolors=16
+  let g:solarized_termcolors=256
   let g:solarized_visibility = "high"
   let g:solarized_contrast = "high"
   colorscheme solarized
   call MakeDark()
+  call ClearBackground()
 endfunction
 
 function! TomorrowNight()
@@ -135,8 +146,11 @@ function! TomorrowNight()
   call ClearBackground()
 endfunction
 
+"call SolarizedDark()
+
 "call MakeLight()
-call TomorrowNight()
+"call TomorrowNight()
+call SolarizedDark()
 call SetBorder()
 
 command! -nargs=0 Trim :call Trim()
@@ -151,7 +165,7 @@ nnoremap <silent> <Leader>cw :Trim<CR>
 " solarized + coffee == annoying parens, fix that
 autocmd BufReadPost *.coffee hi coffeeParen ctermfg=none
 
-augroup markdown
-  au!
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup
+"augroup markdown
+"  au!
+"  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+"augroup

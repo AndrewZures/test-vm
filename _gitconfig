@@ -1,6 +1,6 @@
 [user]
-	name = __NAME__
-	email = __EMAIL__
+	name = Andrew Zures
+	email = azures@8thlight.com
 
 [color]
   ui = auto
@@ -33,3 +33,6 @@
 
 [merge]
   tool = opendiff
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f

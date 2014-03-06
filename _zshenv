@@ -6,6 +6,9 @@ colors
 #Path
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH="${PATH}:/usr/local/share/npm/bin"
+export PATH="${PATH}:/Users/andrewzures/.rvm/gems"
+export PATH="${PATH}:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/andrewzures/.rvm/bin"
+export PATH="${PATH}:/Users/andrewzures/.rvm/gems/ruby-2.0.0-p451/bin"
 
 # Env Vars
 export EDITOR=vim
