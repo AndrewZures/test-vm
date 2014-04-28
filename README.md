@@ -46,6 +46,7 @@ Pretty minimalist.
 * Powerline
 * Fugitive
 * TComment
+* SuperTab
 * A few syntax files, who even cares about those.
 
 #### Bindings In Normal Mode
@@ -59,17 +60,24 @@ Pretty minimalist.
 
 Leader Stuff
 
-* Leader + fs : Go fullscreen without Lion swoosh effect ( MacVim only )
-* Leader + cw : Trim trailing whitespace
-* Leader + t  : Command-T file browser
-* Leader + fr : Refresh Command-T
-* Leader + fb : Command-T buffer list
-* Leader + nt : toggle NERDTree
+* Leader + fs    : Go fullscreen without Lion swoosh effect ( MacVim only )
+* Leader + cw    : Trim trailing whitespace
+* Leader + w     : Also Trims whitespace
+* Leader + t     : Command-T file browser
+* Leader + fr    : Refresh Command-T
+* Leader + fb    : Command-T buffer list
+* Leader + nt    : toggle NERDTree
+* Leader + space : clear search highlight (:noh)
 
 #### Bindings In Insert Mode
 * Ctrl + L    : insert hash-rocket (=>)
 * Ctrl + K    : insert method-missile (->)
 
+
+#### ColorScheme Stuff
+* ClearBackground  : clears vim background, revealing terminal color instead
+* SolarizedLight   : sets colorscheme to Solarized Light
+* SolarizedDark    : MY Solarized Dark Scheme
 
 ## A few notes on VCPrompt
 > curl https://raw.github.com/djl/vcprompt/v1.0.1/bin/vcprompt > /usr/local/bin/vcprompt && sudo chmod +x /usr/local/bin/vcprompt
