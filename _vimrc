@@ -1,7 +1,7 @@
 syntax on
 
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 filetype plugin indent on
 
 compiler ruby
@@ -35,9 +35,6 @@ set winminwidth=15
 set list
 set listchars=tab:\ \ ,trail:·
 
-"map leader-space to clear (noh)
-noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
-
 "apply highlight to additional file types
 au BufNewFile,BufRead *.hiccup set filetype=clojure
 au BufNewFile,BufRead *.cljs set filetype=clojure
@@ -45,6 +42,8 @@ au BufNewFile,BufRead *.cljs set filetype=clojure
 "clean whitespace
 nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
 
+"map leader-space to clear (noh)
+noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 
 hi Search    ctermbg=none ctermfg=none cterm=underline
 hi IncSearch ctermbg=none ctermfg=none cterm=bold,underline
@@ -103,6 +102,14 @@ function! Trim()
   exe "normal zz"
 endfunction
 
+"tagbar toggle
+nmap <F8> :TagbarToggle<CR>
+
+"closure compiler/syntastic
+let g:syntastic_javascript_checkers =['jshint']
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+
 "syntax highlighting functions
 let g:solarized_termcolors=256
 
@@ -131,7 +138,6 @@ function! SolarizedLight()
 endfunction
 
 function! SolarizedDark()
-  "let g:solarized_termcolors=16
   let g:solarized_termcolors=256
   let g:solarized_visibility = "high"
   let g:solarized_contrast = "high"
@@ -146,12 +152,10 @@ function! TomorrowNight()
   call ClearBackground()
 endfunction
 
-"call SolarizedDark()
-
-"call MakeLight()
-"call TomorrowNight()
 call SolarizedDark()
 call SetBorder()
+call MakeLight()
+"call TomorrowNight()
 
 command! -nargs=0 Trim :call Trim()
 command! -nargs=0 MakeLight :call MakeLight()
