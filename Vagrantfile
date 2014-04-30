@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 80, host: 8888
 
   # config.vm.box_url = "http://domain.com/path/to/above.box"
-  # config.ssh.username = "my_vm"
+  config.ssh.username = 'vagrant'
   config.ssh.forward_agent = true
 
   config.vm.provider :virtualbox do |vb|
@@ -25,6 +25,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ['modifyvm', :id, '--cpuexecutioncap', options[:cpu_cap]]
     vb.customize ['modifyvm', :id, '--cpus',            options[:cores]]
   end
+
+  config.omnibus.chef_version = :latest
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path  = ['cookbooks', 'custom_cookbooks']
