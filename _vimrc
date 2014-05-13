@@ -38,6 +38,7 @@ set listchars=tab:\ \ ,trail:·
 "apply highlight to additional file types
 au BufNewFile,BufRead *.hiccup set filetype=clojure
 au BufNewFile,BufRead *.cljs set filetype=clojure
+au BufNewFile,BufRead *.ejs set filetype=html
 
 "clean whitespace
 nnoremap <leader>w mz:%s/\s\+$//<cr>:let @/=''<cr>`z
@@ -74,6 +75,11 @@ autocmd QuickFixCmdPost *grep* cwindow
 " key bindings
 imap <C-L> <SPACE>=><SPACE>
 imap <C-K> ->
+map <C-J> :tabp<CR>
+map <C-K> :tabn<CR>
+
+"tagbar toggle
+nmap <F8> :TagbarToggle<CR>
 
 nmap , \
 
@@ -102,10 +108,8 @@ function! Trim()
   exe "normal zz"
 endfunction
 
-"tagbar toggle
-nmap <F8> :TagbarToggle<CR>
 
-"closure compiler/syntastic
+"syntastic/lint
 let g:syntastic_javascript_checkers =['jshint']
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
@@ -161,7 +165,7 @@ command! -nargs=0 Trim :call Trim()
 command! -nargs=0 MakeLight :call MakeLight()
 command! -nargs=0 MakeDark :call MakeDark()
 command! -nargs=0 TomorrowNight :call TomorrowNight()
-command! -nargs=0 SolarizedLight :call SolarizedLight()
+command! -nargs=1 SolarizedLight :call SolarizedLight()
 command! -nargs=0 SolarizedDark :call SolarizedDark()
 command! -nargs=0 ClearBackground :call ClearBackground()
 nnoremap <silent> <Leader>cw :Trim<CR>
