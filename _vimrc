@@ -75,8 +75,14 @@ autocmd QuickFixCmdPost *grep* cwindow
 " key bindings
 imap <C-L> <SPACE>=><SPACE>
 imap <C-K> ->
+
 map <C-J> :tabp<CR>
 map <C-K> :tabn<CR>
+
+" map <C-H> :tabp<CR>
+" map <C-J> :tabn<CR>
+" map <C-K> <C-W>h
+" map <C-L> <C-W>l
 
 "tagbar toggle
 nmap <F8> :TagbarToggle<CR>
