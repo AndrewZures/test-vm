@@ -33,6 +33,9 @@
 
 [merge]
   tool = opendiff
+	tool = mvimdiff
+	tool = mvimdiff
+	tool = prompt
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f

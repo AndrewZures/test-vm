@@ -74,7 +74,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 " key bindings
 imap <C-L> <SPACE>=><SPACE>
-imap <C-K> ->
+" imap <C-K> ->
 
 map <C-J> :tabp<CR>
 map <C-K> :tabn<CR>
@@ -97,11 +97,24 @@ map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>nr :NERDTree<CR>
 map <silent> <LocalLeader>nf :NERDTreeFind<CR>
 
+
 nmap g/ :Ggrep<space>
-nmap g* :Ggrep <C-R><C-W>
+"Ggrep with selected word added
+" nmap g* :Ggrep <C-R><C-W>
+nmap g. :Ggrep <C-R><C-W>
+
+"replace selected word
+nmap g' :%s/<C-R><C-W>/
+
+"copy to osx clipboard
+nmap gy :.w !pbcopy<CR><CR>
+vmap gy :w !pbcopy<CR><CR>
+
 nmap gn :cnext<CR>
 nmap gp :cprev<CR>
 nmap gq :ccl<CR>
+" set clipboard=unnamedplus
+
 nmap gl :cwindow<CR>>
 
 map Y y$
@@ -160,6 +173,11 @@ function! TomorrowNight()
   colorscheme Tomorrow-Night
   call MakeDark()
   call ClearBackground()
+endfunction
+
+function! Test()
+  exe '!grunt connect jazz:src/%'
+
 endfunction
 
 call SolarizedDark()
