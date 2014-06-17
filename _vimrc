@@ -78,11 +78,8 @@ imap <C-L> <SPACE>=><SPACE>
 
 map <C-J> :tabp<CR>
 map <C-K> :tabn<CR>
-
-" map <C-H> :tabp<CR>
-" map <C-J> :tabn<CR>
-" map <C-K> <C-W>h
-" map <C-L> <C-W>l
+map <F1> <Esc>
+imap <F1> <Esc>
 
 "tagbar toggle
 nmap <F8> :TagbarToggle<CR>
