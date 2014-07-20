@@ -9,7 +9,7 @@ execute 'create .vim/bundle direcory' do
   not_if { Dir.exists?('/home/vagrant/.vim') }
 end
 
-execute 'install dotfiles' do
+execute 'symlink dotfiles' do
   command 'ruby auto_install.rb'
 
   cwd '/home/vagrant/src/dotfiles'
@@ -20,5 +20,12 @@ execute 'update vim bundle' do
   command 'ruby update_bundle.rb --force'
 
   cwd '/home/vagrant/src/dotfiles/_vim'
+end
+
+execute 'compile command-t' do
+  user 'vagrant'
+  command 'rbenv local system; ruby extconf.rb; make'
+
+  cwd '/home/vagrant/.vim/bundle/Command-T/ruby/command-t'
 end
 
