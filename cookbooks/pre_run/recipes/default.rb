@@ -14,7 +14,9 @@ apt_packages ['software-properties-common',
               'git',
               'curl',
               'vim-nox',
-              'ruby']
+              'ruby',
+              'ruby-dev',
+              'rbenv']
 
 apt_repositories ['ppa:git-core/ppa'] do
   not_if 'which git'

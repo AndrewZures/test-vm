@@ -10,7 +10,6 @@ execute 'create .vim/bundle direcory' do
 end
 
 execute 'install dotfiles' do
-  # user 'vagrant'
   command 'ruby auto_install.rb'
 
   cwd '/home/vagrant/src/dotfiles'
