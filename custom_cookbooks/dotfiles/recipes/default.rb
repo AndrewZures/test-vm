@@ -3,24 +3,29 @@ git_repository 'dotfiles (default)' do
   destination '/home/vagrant/src/dotfiles'
 end
 
-execute 'copy vim directory' do
+execute 'create .vim/bundle direcory' do
   user 'vagrant'
-  command 'cp -R /home/vagrant/src/dotfiles/_vim /home/vagrant/.vim'
-
+  command 'mkdir /home/vagrant/.vim'
   not_if { Dir.exists?('/home/vagrant/.vim') }
 end
 
-execute 'create .vim/bundle direcory' do
-  user 'vagrant'
-  command 'mkdir /home/vagrant/.vim/bundle'
+execute 'symlink dotfiles' do
+  command 'ruby auto_install.rb'
 
-  not_if { Dir.exists?('/home/vagrant/.vim/bundle') }
+  cwd '/home/vagrant/src/dotfiles'
 end
 
 execute 'update vim bundle' do
   user 'vagrant'
   command 'ruby update_bundle.rb --force'
 
-  cwd '/home/vagrant/.vim'
+  cwd '/home/vagrant/src/dotfiles/_vim'
+end
+
+execute 'compile command-t' do
+  user 'vagrant'
+  command 'rbenv local system; ruby extconf.rb; make'
+
+  cwd '/home/vagrant/.vim/bundle/Command-T/ruby/command-t'
 end
 
