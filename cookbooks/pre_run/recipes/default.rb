@@ -13,7 +13,8 @@ apt_packages ['software-properties-common',
               'openssh-client',
               'git',
               'curl',
-              'vim-nox',
+              'vim-gnome',
+              'ruby',
               'zsh']
 
 apt_repositories ['ppa:git-core/ppa'] do

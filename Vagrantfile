@@ -24,6 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ['modifyvm', :id, '--memory',          options[:ram] * 1024]
     vb.customize ['modifyvm', :id, '--cpuexecutioncap', options[:cpu_cap]]
     vb.customize ['modifyvm', :id, '--cpus',            options[:cores]]
+    vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']
   end
 
   config.omnibus.chef_version = :latest
